@@ -15,7 +15,8 @@ export default [
     description: "Learn to cook the best meal on the planet with a legendary Food Network Star",
     duration: 45,
     featureImage: 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2008/1/31/0/italiancooking_lasagna.jpg.rend.hgtvcom.826.620.suffix/1382982573090.jpeg',
-    classType: 'on-demand'
+    classType: 'on-demand',
+    isFavored: true,
   },
   {
     id: 3,
@@ -27,7 +28,7 @@ export default [
     classType: 'on-demand'
   },
   {
-    id: 3,
+    id: 4,
     title: "Comfort Foods with Ree",
     description: "Can't go wrong with Ree",
     instructor: "Ree Drummond",

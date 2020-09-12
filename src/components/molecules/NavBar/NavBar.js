@@ -32,7 +32,7 @@ const HeaderMenu = styled.div`
   justify-content: space-between;
   display: flex;
 `
-const HeaderItem = styled.div`
+const HeaderItem = styled.h4`
   padding: 0 10px 0 10px;
   text-align: center;
   box-sizing: border-box;
