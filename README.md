@@ -32,7 +32,8 @@ Compare Sarah's original repo and my repo to see the difference.
 
 ### Sneak peek
 <div align="left">
-    <img src="/public/readme_01.jpg" >
+    Before: <img src="/public/readme_01.jpg" >
+    After: <img src="/public/readme_02.jpg" >
 </div>
 
 ### Available Scripts
