@@ -13,21 +13,21 @@ The first thing when you are working on any project, always think how you can br
 Compare Sarah's original repo and my repo to see the difference.
 
 ### Must-haves features for a MS
-1. Delete an item in your system if you no longer want to have them.
-2. Add/Craete a new item to your list whenever you need to.
-3. Layout your items as an evenly-distributed grid for different devices.
-4. Favor any items you like, and create a "My Favor" section for the user to check back anytime they want. They can also add and delete any favor items asmany times as they need to.
+1. Delete an item in your list if you no longer want to keep.
+2. Add/Create a new item to your list whenever you need to.
+3. Layout your items as an evenly-distributed grid for different devices (phones, laptops, ...).
+4. Favor any items you like, and create a "My Favor" section. So you can check back anytime you want. You can also add and delete any favor items as many times as you need to.
 
 ### What you can learn form this project
-1. How to manage React state without redux. In this app, I use multiple React Hooks, such as useState(), useEffect(),and createRef().
+1. How to manage React state without redux. In this app, I use multiple React Hooks, such as useState(), useEffect(),and createRef() for managing the state wihtin the app.
 2. How to create a simple ImageSwiper component.
 3. How to create a simple PopModal. This is very useful, especially when you wanna create a simpel app without getting involved with routers.
-4. How to use the Fetch API with vanilla JS.
-5. How to create a media query helper funciton to make your responsive tasks easier when working with some component-level styles library such as 'styled-components'.
+4. How to use the Fetch API with vanilla JS. It is very useful when you want to do some simple fetch without being blocked by CORS policy.
+5. How to create a media query helper function to make your responsive tasks easier when working with some component-level styled system library such as 'styled-components'.
 6. Allowing users to favor any items they like and come back to check back anytime they want is the most useful feature for any management system. However, unlike "Add" and "Delete" which will change the items you have, "Favor Items" work more like a temp list. You cannot completely remove or add them to our original list of items, but keep a copy and flag them instead. Adding tis feature is a good exercise for knowing the difference between all those React Hooks when managing the state.
 
 ### Demos before you start diving into the code bases
-1. The demo of the original repo with some limited bug fixing can be found [HERE](https://react-management-system.herokuapp.com/).
+1. The demo of the original repo with some limited bug fixing can be found [HERE](https://rookie-cookie-origin.herokuapp.com/).
 2. This repo's demo can also be found at this heroku [link](https://react-management-system.herokuapp.com/).
 
 ### Sneak peek
