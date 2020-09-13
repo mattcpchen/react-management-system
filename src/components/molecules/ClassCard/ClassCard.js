@@ -4,30 +4,32 @@ import styled from 'styled-components'
 import FavorHeart from '../../atoms/FavorHeart'
 import CircleButton from '../../atoms/CircleButton'
 
-const ClassCard = ({className, content, hideFavBtn, hideDeleteBtn, toggleFavor, handleDelete}) => {
+const ClassCard = ({className, content, isForPreview, toggleFavor, handleDelete}) => {
   const {
-    classType,
+    title,
+    instructor,
     description,
     duration,
+    classType,
     featureImage,
     featuredImage,
     featureImageUrl,
-    instructor,
-    title,
     isFavored,
   } = content
   const imgUrl = featureImage || featuredImage || featureImageUrl
   return (
-  <CardWrapper className={className}>
-    {!hideFavBtn && <StyledFavorHeart handleClick={toggleFavor} isFavored={isFavored} />}
-    {!hideDeleteBtn && <StyledCircleButton handleClick={handleDelete}>-</StyledCircleButton>}
+  <CardWrapper className={className} isForPreview={isForPreview} >
+    {!isForPreview && <StyledFavorHeart handleClick={toggleFavor} isFavored={isFavored} />}
+    {!isForPreview && <StyledCircleButton handleClick={handleDelete}>-</StyledCircleButton>}
     <CardImage src={imgUrl} alt='' />
     <CardContent>
-      <h4>{title}</h4>
-      <h5>{instructor}</h5>
-      <h5>{description}</h5>
-      <h5>{duration} min</h5>
-      <h5>{classType}</h5>
+      <CardContentTitle>{title}</CardContentTitle>
+      <CardContentDetail>
+        <p>Instructor: {instructor}</p>
+        <p>Description: {description}</p>
+        <p>Total time: {duration} min</p>
+        <p>Class Type: {classType}</p>
+      </CardContentDetail>
     </CardContent>
   </CardWrapper>
 )}
@@ -35,6 +37,7 @@ const ClassCard = ({className, content, hideFavBtn, hideDeleteBtn, toggleFavor, 
 const CardWrapper = styled.div`
   position: relative;
   width: 175px;
+  width: ${props => props.isForPreview ? '300px' : '175px'};
   height: 300px;
   border-radius: 10px;
   border: solid 1px #999;
@@ -58,27 +61,39 @@ const CardImage = styled.img`
 `
 
 const CardContent = styled.div`
-  height: 200px;
+  height: 150px;
   overflow: auto;
+`
+const CardContentTitle = styled.div`
+  font-size: 16px;
+  font-weight: 900;
+  margin-bottom: 15px;
+  padding: 0 5px;
+`
+
+const CardContentDetail = styled.div`
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 10px;
+  padding: 0 5px;
 `
 
 ClassCard.propTypes = {
   content: PropTypes.shape({
     classType: PropTypes.string,
     id: PropTypes.number,
-    duration: PropTypes.string,
+    duration: PropTypes.number,
     title: PropTypes.string,
     featureImage: PropTypes.string,
     featuredImage: PropTypes.string,
     featureImageUrl: PropTypes.string,
     instructor: PropTypes.string,
   }),
-  hideFavBtn: PropTypes.bool,
-  hideDeleteBtn: PropTypes.bool,
+  isForPreview: PropTypes.bool,
 };
 ClassCard.defaultProps = {
-  hideFavBtn: false,
-  hideDeleteBtn: false,
+  isForPreview: false,
+  isFavored: false,
 }
 
 export default ClassCard;

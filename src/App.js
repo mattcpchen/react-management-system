@@ -5,12 +5,17 @@ import BaseButton from './components/atoms/BaseButton'
 import ClassCards from './components/organisms/ClassCards'
 import NavBar from './components/molecules/NavBar'
 import ModalContainer from './components/organisms/ModalContainer'
+import { display as mediaDisplay } from './helpers/deviceHelper'
 
 const App = () => {
   const [showState, setShowState] = useState('showAll')
   const [allClasses, setAllClasses] = useState()
   const [classes, setClasses] = useState()
 
+  /**
+   * The reason we also includes allClasses is because we wanna
+   * update classes when we are in MyFavor page as well
+   */
   useEffect(() => {
     // when first mounted
     if (allClasses === undefined) {
@@ -27,7 +32,7 @@ const App = () => {
       }
     })
     setClasses(newClasses)
-  }, [showState])
+  }, [allClasses, showState])
 
   const onToggleShowState = () => {
     const newShowState = showState === 'showAll' ? 'showFavored' : 'showAll'
@@ -51,6 +56,12 @@ const App = () => {
     })
     setClasses(newClasses)
     setAllClasses(newAllClasses)
+
+    // back to showAll if we uncheck favor
+    // reason to be 1 instead of 0 >> cause it will be updated to 0 AFTERWARDS @ useEffect
+    if (showState === 'showFavored' && newClasses.length === 1) {
+      onToggleShowState()
+    }
   }
 
   const onHandleCreate = (newClass) => {
@@ -65,15 +76,20 @@ const App = () => {
     const newAllClasses = allClasses.filter(card => card.id !== cardId)
     setClasses(newClasses)
     setAllClasses(newAllClasses)
+
+    // back to showAll if we have none favor left
+    if (showState === 'showFavored' && newClasses.length === 0) {
+      onToggleShowState()
+    }
   }
 
   const title = showState === 'showAll'
     ? 'Welcome to RookieCookie!'
-    : 'My Favorite RookieCookie!'
+    : `My Favorite Class${classes.length > 1 ? 'es' : ''}`
   return (
     <Wrapper>
       <NavBar />
-      <h1>{title}</h1>
+      <NavBarTitle>{title}</NavBarTitle>
       <ClassCards
         classes={classes}
         onToggleFavor={onToggleFavorCard}
@@ -92,8 +108,21 @@ const App = () => {
 }
 
 const Wrapper = styled.div`
-  margin-top: 45px;
+  margin-top: 65px;
   text-align: center;
+  @media ${mediaDisplay.with4} {
+    margin-top: 45px;
+  }
+`
+const NavBarTitle = styled.div`
+  display: block;
+  font-size: 1em;
+  margin: 0.3em 0 0.3em 0;
+  font-weight: bold;
+  @media ${mediaDisplay.with4} {
+    margin: 0.67em 0 0.67em 0;
+    font-size: 2em;
+  }
 `
 
 const ButtonGroup = styled.div`

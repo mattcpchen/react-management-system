@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import BaseButton from '../../atoms/BaseButton'
 import SimpleModal from '../../molecules/SimpleModal'
 import { NewCardForm_S1, NewCardForm_S2, NewCardForm_S3 } from '../../molecules/NewCardForms'
-import ClassCards from "../ClassCards";
 
 
 const ModalContainer = ({className, onHandleCreate}) => {
@@ -22,6 +21,7 @@ const ModalContainer = ({className, onHandleCreate}) => {
   const onCloseModal = () => {
     setModalState(false)
     setCreateCardStep(1)
+    resetCardData()
   }
 
   const renewCardData = (newData) => {
@@ -30,6 +30,9 @@ const ModalContainer = ({className, onHandleCreate}) => {
       ...newData,
     }
     setNewClassCard(classCard);
+  }
+  const resetCardData = () => {
+    setNewClassCard({});
   }
 
 
@@ -41,16 +44,24 @@ const ModalContainer = ({className, onHandleCreate}) => {
       <BaseButton handleClick={onOpenModal}>Add New Class</BaseButton>
       <SimpleModal show={modalState} title={modelTitle} handleClose={onCloseModal}>
         {createStep === 1 &&
-          <NewCardForm_S1 setCreateCardStep={setCreateCardStep} renewCardData={renewCardData} />
+          <NewCardForm_S1
+            setCreateCardStep={setCreateCardStep}
+            newClassCard={newClassCard}
+            renewCardData={renewCardData}
+          />
         }
         {createStep === 2 &&
-          <NewCardForm_S2 setCreateCardStep={setCreateCardStep} renewCardData={renewCardData} />
+          <NewCardForm_S2
+            setCreateCardStep={setCreateCardStep}
+            newClassCard={newClassCard}
+            renewCardData={renewCardData}
+          />
         }
         {createStep === 3 &&
           <NewCardForm_S3
             setCreateCardStep={setCreateCardStep}
-            generateNewCard={generateNewCard}
             newClassCard={newClassCard}
+            generateNewCard={generateNewCard}
           />
         }
       </SimpleModal>

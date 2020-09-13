@@ -1,4 +1,4 @@
-import React, { useState, createRef } from 'react'
+import React, { useState, useEffect, createRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import BaseButton from '../../atoms/BaseButton'
@@ -69,10 +69,6 @@ const NewCardForm = ({setCreateCardStep, renewCardData}) => {
   )
 }
 
-
-
-NewCardForm.propTypes = {
-}
 
 const StyledForm = styled.div`
   display: flex;

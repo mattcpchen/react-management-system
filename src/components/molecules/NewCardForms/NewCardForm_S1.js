@@ -1,18 +1,32 @@
-import React, { useState, createRef } from 'react'
+import React, { useState, useEffect, createRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import BaseButton from '../../atoms/BaseButton'
 import BaseInputText from '../../atoms/BaseInputText'
 import ErrorMessage from '../../atoms/ErrorMessage'
 
-const NewCardForm = ({setCreateCardStep, renewCardData}) => {
+const isNumberic = (numString) => {
+  return numString.replace(/[^0-9]/gi, '') === numString
+}
+
+const NewCardForm = ({setCreateCardStep, newClassCard, renewCardData}) => {
   const [errorMessage, setErrorMessage] = useState(null)
+  // createRef
   const titleRef = createRef()
   const instructorRef = createRef()
   const descriptionRef = createRef()
   const durationRef = createRef()
   const ondemandClassRef = createRef()
   const liveClassRef = createRef()
+
+  useEffect(() => {
+    titleRef.current.value = newClassCard.title || ''
+    instructorRef.current.value = newClassCard.instructor || ''
+    descriptionRef.current.value = newClassCard.description || ''
+    durationRef.current.value = newClassCard.duration || ''
+    ondemandClassRef.current.checked = newClassCard.classType === 'on-demand'
+    liveClassRef.current.checked = newClassCard.classType === 'live'
+  }, [newClassCard])
 
   const submitForNext = () => {
     const titleTF = titleRef.current
@@ -30,7 +44,9 @@ const NewCardForm = ({setCreateCardStep, renewCardData}) => {
     } else if (descriptionTF.value === '') {
       errMessage = 'Description is missing!'
     } else if (durationTF.value === '') {
-      errMessage = 'Duration is missing!'
+      errMessage = 'Duration is missing or Wrong format!'
+    } else if ( !isNumberic(durationTF.value) ) {
+      errMessage = 'Duration MUST be number only!'
     } else if (!onDemandRadio.checked && !liveRadio.checked) {
       errMessage = 'You need to choose the class type'
     } else {
@@ -39,7 +55,7 @@ const NewCardForm = ({setCreateCardStep, renewCardData}) => {
         title: titleTF.value,
         instructor: instructionTF.value,
         description: descriptionTF.value,
-        duration: durationTF.value,
+        duration: Number(durationTF.value),
         classType: onDemandRadio.checked ? 'on-demand' : 'live',
       })
     }
@@ -58,19 +74,16 @@ const NewCardForm = ({setCreateCardStep, renewCardData}) => {
       <StyledBaseInputText type='number' inputRef={durationRef} placeholder='Enter Class Duration' />
 
       <RadioGroup>
-        <input type="radio" value="on-demand" ref={ondemandClassRef} name="classType" />On-Demand Class
-        <input type="radio" value="live" ref={liveClassRef} name="classType" />Live Class
+        <input type="radio" value="on-demand" ref={ondemandClassRef} name="classType" id="classType-onDemand" />
+        <label htmlFor="classType-onDemand">On-Demand Class</label><br/>
+        <input type="radio" value="live" ref={liveClassRef} name="classType" id="classType-live" />
+        <label htmlFor="classType-live">Live Class</label>
       </RadioGroup>
 
       <StyledBaseButton handleClick={submitForNext}>Go To Next Step</StyledBaseButton>
       {errorMessage && <StyleErrorMessage message={errorMessage} />}
     </StyledForm>
   )
-}
-
-
-
-NewCardForm.propTypes = {
 }
 
 const StyledForm = styled.div`
@@ -80,7 +93,7 @@ const StyledForm = styled.div`
 `
 
 const StyledBaseInputText = styled(BaseInputText)`
-  width: 80%;   
+  width: 80%;
 `
 
 const RadioGroup = styled.div`
@@ -98,6 +111,7 @@ const StyleErrorMessage = styled(ErrorMessage)`
 NewCardForm.propTypes = {
   setCreateCardStep: PropTypes.func,
   renewCardData: PropTypes.func,
+  newClassCard: PropTypes.object,
 }
 
 export default NewCardForm

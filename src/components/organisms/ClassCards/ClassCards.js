@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import ClassCard from '../../molecules/ClassCard'
+import { size as mediaSize, display as mediaDisplay } from '../../../helpers/deviceHelper'
 
 const ClassCards = ({className, classes, onToggleFavor, onHandleDelete}) => (
   <ClassCardHolder className={className}>
@@ -16,16 +17,29 @@ const ClassCards = ({className, classes, onToggleFavor, onHandleDelete}) => (
   </ClassCardHolder>
 )
 
+
 const ClassCardHolder = styled.div`
   position: relative;
-  width: 800px;
   margin: 0 auto;
+  width: ${mediaSize.with2};
   &::after {
     content: '';
     clear: both;
     display: block;
     height: 0;
     visibility: hidden;
+  }
+  @media ${mediaDisplay.with3} {
+    width: ${mediaSize.with3};
+  }
+  @media ${mediaDisplay.with4} {
+    width: ${mediaSize.with4};
+  }
+  @media ${mediaDisplay.with5} {
+    width: ${mediaSize.with5};
+  }
+  @media ${mediaDisplay.with6} {
+    width: ${mediaSize.with6};
   }
 `
 

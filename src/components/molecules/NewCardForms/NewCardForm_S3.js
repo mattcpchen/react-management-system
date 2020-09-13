@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import BaseButton from '../../atoms/BaseButton'
 import ClassCard from '../../molecules/ClassCard'
 
-const NewCardForm = ({setCreateCardStep, generateNewCard, newClassCard}) => {
+const NewCardForm = ({setCreateCardStep, newClassCard, generateNewCard}) => {
 
   const submitForBack = () => {
     setCreateCardStep(2)
@@ -15,18 +15,13 @@ const NewCardForm = ({setCreateCardStep, generateNewCard, newClassCard}) => {
 
   return (
     <StyledForm>
-      <ClassCard content={newClassCard} hideFavBtn hideDeleteBtn />
+      <ClassCard content={newClassCard} isForPreview />
       <div>
         <StyledButton handleClick={submitForBack}>Back</StyledButton>
         <StyledButton handleClick={submitForAddNew}>Submit</StyledButton>
       </div>
     </StyledForm>
   )
-}
-
-
-
-NewCardForm.propTypes = {
 }
 
 const StyledForm = styled.div`
