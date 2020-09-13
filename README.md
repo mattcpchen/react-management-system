@@ -6,9 +6,10 @@ This projevy was cloned from Sarah Sweat's [RookieCookie App](https://github.com
 In this project, you will learn:
 
 ### Organizing your code base
-The first thing when you are working on any project, always think how you can break it into a component hierarchy. The original layout is just one simple APP.js file contains all necessary items. A good practice is to break them into as many re-usable components as possible. Not only that you can reuse it multiple times, but it is also easier to write unit tests. In this exercise, I break all components into 3 groups. Atoms contain all small reusable components, such as "CircleButton", "InputText", "DefaultImage", "ErrorMessage", ...etc. 
-When you have some combinations of atom components, it is when you wanna consider putting them into "Molecules" folder. "ImageSwiper", "ClassCard", "NavBar" and the "PopModal" components are good examples for this purpose.
-Finally, we have organisms which have our final pieces.
+The first thing when you are working on any project, always think how you can break it into a component hierarchy. The original layout is just one simple APP.js file contains all necessary items. A good practice is to break them into as many re-usable components as possible. Not only that you can reuse it multiple times, but it is also easier to write unit tests. In this exercise, I break all components into 3 groups. 
+1. Atoms contain all small reusable components, such as "CircleButton", "InputText", "DefaultImage", "ErrorMessage", ...etc. 
+2. When you have some combinations of atom components, it is when you wanna consider putting them into "Molecules" folder. "ImageSwiper", "ClassCard", "NavBar" and the "PopModal" components are good examples for this purpose.
+3. Finally, we have organisms which have our final pieces.
 Compare Sarah's original repo and my repo to see the difference.
 
 ### Must-haves features for a MS
